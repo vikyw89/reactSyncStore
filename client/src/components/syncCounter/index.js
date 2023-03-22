@@ -1,7 +1,5 @@
-import { forDebug, sync, useSync } from "@/lib/hooks/useSync";
+import { useSync } from "@/lib/hooks/useSync";
 import { counterStore } from "@/lib/stores/counterStore";
-import { cloneDeep } from "lodash-es";
-import { useEffect } from "react";
 
 
 const SyncCounter = ({props}) => {
