@@ -38,12 +38,12 @@ export const useSync = (externalStore) => {
 
   useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  const output = () => {
+  const withEmit = () => {
     setTimeout(()=>{
-     emitChange() 
+      emitChange()
     })
-    return externalStore
+    const state = externalStore
+    return state
   }
-
-  return output
+  return withEmit
 };

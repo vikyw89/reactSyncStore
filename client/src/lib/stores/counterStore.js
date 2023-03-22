@@ -1,4 +1,3 @@
-import { emitChange, useSyncEmitChange } from "../hooks/useSync";
 
 // a simple countStore with 2 methods
 
@@ -7,11 +6,11 @@ const state = {
 };
 
 const increment = () => {
-  state.count = state.count + 1;
+  state.count++
 };
 
 const decrement = () => {
-  state.count = state.count - 1
+  state.count--
 };
 
 export const counterStore = {

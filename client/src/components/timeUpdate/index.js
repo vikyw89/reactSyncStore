@@ -1,9 +1,9 @@
 import { emitChange, useSync } from "@/lib/hooks/useSync";
-import { counterStore } from "@/lib/stores/counterStore";
+import { timeStore } from "@/lib/stores/timeStore";
 
 
-const SyncCounter = ({props}) => {
-  const counter = useSync(counterStore);
+const TimeCounter = ({props}) => {
+  const counter = useSync(timeStore);
   console.log(`rerendering ${props}`)
   return (
     <>
@@ -27,25 +27,14 @@ const SyncCounter = ({props}) => {
             gap:'10px'
           }}
         >
+          <div>{counter().state}</div>
           <button
             style={{
               padding: "5px",
               fontWeight: "bold",
             }}
             onClick={() => {
-              counter().increment()
-            }}
-          >
-            +
-          </button>
-          <div>{counter().state.count}</div>
-          <button
-            style={{
-              padding: "5px",
-              fontWeight: "bold",
-            }}
-            onClick={() =>{
-              counter().decrement()
+                counter().sync()
             }}
           >
             -
@@ -56,4 +45,4 @@ const SyncCounter = ({props}) => {
   );
 };
 
-export default SyncCounter;
+export default TimeCounter;
