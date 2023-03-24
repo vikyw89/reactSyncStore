@@ -2,7 +2,7 @@ import { useStore } from "@/lib/hooks/useStore";
 
 const StoreCounter = ({ props }) => {
   const { counter, setCounter } = useStore("counter");
-  console.log(`rerendering useStore ${props}`);
+
   return (
     <>
       <div

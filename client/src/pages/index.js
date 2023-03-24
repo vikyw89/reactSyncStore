@@ -2,24 +2,22 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 import StateCounter from "@/components/stateCounter";
 import StoreCounter from "@/components/storeCounter";
-import { externalStore, subscribers, useStore } from "@/lib/hooks/useStore";
+import { externalStore, subscribers, useStore, useStoreDebugger, useStoreStats } from "@/lib/hooks/useStore";
 import { useEffect, useState } from "react";
+import { counterStore } from "@/lib/store/counter";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { toggle, setToggle } = useStore("toggle");
-  const { counter, setCounter } = useStore("counter");
-  const [state, setState] = useState(externalStore);
+  const { toggle, setToggle, debug } = useStore("toggle");
+  const { setCounter } = useStore("counter");
 
-  console.log('rerender Home')
   useEffect(() => {
     setToggle(false);
-    setCounter(0);
   }, []);
   useEffect(() => {
-    console.log("externalStore change");
-  }, [externalStore]);
+    useStoreDebugger()
+  });
   return (
     <>
       <div className={styles.main}>
