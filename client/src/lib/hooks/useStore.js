@@ -1,8 +1,8 @@
 import { useSyncExternalStore } from "react";
 
-let externalStore = { counter: 1 };
+export const externalStore = {};
 
-let subscribers = [];
+export let subscribers = [];
 
 /**
  * A hook to synchronize an external store with the current component's state.
@@ -12,17 +12,17 @@ let subscribers = [];
  */
 export const useStore = (selector) => {
   const getSnapshot = () => {
-    return JSON.stringify(externalStore[selector]);
+    return JSON.stringify(externalStore?.[selector]);
   };
 
   const getServerSnapshot = () => {
-    return JSON.stringify(externalStore[selector]);
+    return JSON.stringify(externalStore?.[selector]);
   };
 
   const setStore = (arg) => {
     switch (typeof arg) {
       case "function": {
-        externalStore[selector] = arg(externalStore[selector]);
+        externalStore[selector] = arg(externalStore?.[selector]);
         //   console.log(arg(externalStore[selector]));
         break;
       }
@@ -43,7 +43,7 @@ export const useStore = (selector) => {
   return {
     get [selector]() {
       useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
-      return externalStore[selector];
+      return externalStore?.[selector];
     },
     [setterName]: (valueOrFn) => {
       setStore(valueOrFn)
