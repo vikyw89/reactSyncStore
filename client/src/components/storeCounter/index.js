@@ -1,13 +1,11 @@
-import { emitChange, useSync } from "@/lib/hooks/useSync";
-import { counterStore } from "@/lib/stores/counterStore";
+import { useStore } from "@/lib/hooks/useStore";
 
-
-const SyncCounter = ({props}) => {
-  const counter = useSync(counterStore);
-  console.log(`rerendering ${props}`)
+const StoreCounter = ({ props }) => {
+  const { counter, setCounter } = useStore("counter");
+  console.log(`rerendering useStore ${props}`);
   return (
     <>
-       <div
+      <div
         style={{
           display: "flex",
           justifyContent: "center",
@@ -17,14 +15,14 @@ const SyncCounter = ({props}) => {
           flexDirection: "column",
         }}
       >
-        <div>counter #{props} using useSync</div>
+        <div>counter #{props} using useStore</div>
 
         <div
           style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap:'10px'
+            gap: "10px",
           }}
         >
           <button
@@ -33,19 +31,19 @@ const SyncCounter = ({props}) => {
               fontWeight: "bold",
             }}
             onClick={() => {
-              counter().increment()
+              setCounter((p) => p + 1);
             }}
           >
             +
           </button>
-          <div>{counter().state.count}</div>
+          <div>{counter}</div>
           <button
             style={{
               padding: "5px",
               fontWeight: "bold",
             }}
-            onClick={() =>{
-              counter().decrement()
+            onClick={() => {
+              setCounter((p) => p - 1);
             }}
           >
             -
@@ -56,4 +54,4 @@ const SyncCounter = ({props}) => {
   );
 };
 
-export default SyncCounter;
+export default StoreCounter;
